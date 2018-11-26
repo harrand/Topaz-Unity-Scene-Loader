@@ -53,20 +53,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Resources\Scripts\NodeName.cs" />
      <Compile Include="Assets\Resources\Scripts\SceneImporter.cs" />
      <Compile Include="Assets\Resources\Scripts\SceneImportTest.cs" />
      <None Include="Assets\Resources\TZScenes\test_scene.xml" />
  <Reference Include="UnityEditor.StandardEvents">
- <HintPath>C:/Users/Harrand/Programming/Projects/Scene Loading Unity Side/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ <HintPath>C:/Users/Harrand/Programming/Projects/Dissertation/Scene Loading Unity Side/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/Harrand/Programming/Projects/Scene Loading Unity Side/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/Harrand/Programming/Projects/Dissertation/Scene Loading Unity Side/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>C:/Users/Harrand/Programming/Projects/Scene Loading Unity Side/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>C:/Users/Harrand/Programming/Projects/Dissertation/Scene Loading Unity Side/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/Harrand/Programming/Projects/Scene Loading Unity Side/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/Harrand/Programming/Projects/Dissertation/Scene Loading Unity Side/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>E:/Applications/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

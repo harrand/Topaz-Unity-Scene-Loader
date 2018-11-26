@@ -23,6 +23,7 @@
       <y>1</y>
       <z>1</z>
     </scale>
+    <node>A</node>
   </object0>
 
   <object1>
@@ -49,5 +50,6 @@
       <y>4</y>
       <z>4</z>
     </scale>
+    <node>B</node>
   </object1>
 </scene>

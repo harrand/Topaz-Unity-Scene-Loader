@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,6 +30,7 @@ public class SceneImporter
     public const String position_element_name = "position";
     public const String rotation_element_name = "rotation";
     public const String scale_element_name = "scale";
+    public const String node_element_name = "node";
 
     private XmlDocument scene_file;
     private List<TextBasedObject> imported_objects;
@@ -59,12 +61,16 @@ public class SceneImporter
         foreach(TextBasedObject tbo in this.imported_objects)
         {
             GameObject obj = (GameObject.Instantiate(Resources.Load(tbo.mesh_link)) as GameObject).transform.GetChild(0).gameObject;
+            NodeName node = obj.AddComponent<NodeName>();
             obj.transform.SetParent(root.transform);
             MeshRenderer mesh_renderer = obj.GetComponent<MeshRenderer>();
             mesh_renderer.material.mainTexture = GameObject.Instantiate(Resources.Load(tbo.texture_link) as Texture);
             obj.transform.localPosition = tbo.transform.position;
             obj.transform.localRotation = Quaternion.Euler(tbo.transform.rotation);
             obj.transform.localScale = tbo.transform.scale;
+            node.node_name = tbo.node_name;
+            // Make them possible occluders.
+            GameObjectUtility.SetStaticEditorFlags(obj, (StaticEditorFlags.OccluderStatic));
         }
         return scene;
     }
@@ -81,14 +87,16 @@ public class SceneImporter
         public String mesh_link;
         public String texture_name;
         public String texture_link;
+        public String node_name;
         public SimpleTransform transform;
-        public TextBasedObject(String mesh_name, String mesh_link, String texture_name, String texture_link, SimpleTransform transform) { this.mesh_name = mesh_name; this.mesh_link = mesh_link; this.texture_name = texture_name; this.texture_link = texture_link; this.transform = transform; }
+        public TextBasedObject(String mesh_name, String mesh_link, String texture_name, String texture_link, String node_name, SimpleTransform transform) { this.mesh_name = mesh_name; this.mesh_link = mesh_link; this.texture_name = texture_name; this.texture_link = texture_link; this.node_name = node_name; this.transform = transform; }
         public TextBasedObject(XmlNode node)
         {
             this.mesh_name = Utility.FirstChildElement(Utility.FirstChildElement(node, SceneImporter.mesh_element_name), SceneImporter.element_label_name).InnerText;
             this.mesh_link = Utility.FirstChildElement(Utility.FirstChildElement(node, SceneImporter.mesh_element_name), SceneImporter.element_label_path).InnerText;
             this.texture_name = Utility.FirstChildElement(Utility.FirstChildElement(node, SceneImporter.texture_element_name), SceneImporter.element_label_name).InnerText;
             this.texture_link = Utility.FirstChildElement(Utility.FirstChildElement(node, SceneImporter.texture_element_name), SceneImporter.element_label_path).InnerText;
+            this.node_name = Utility.FirstChildElement(node, SceneImporter.node_element_name).InnerText;
             this.transform = new SimpleTransform(Vector3.zero, Vector3.zero, Vector3.zero);
             XmlNode element = Utility.FirstChildElement(node, SceneImporter.position_element_name);
             transform.position.x = float.Parse(Utility.FirstChildElement(element, "x").InnerText);
